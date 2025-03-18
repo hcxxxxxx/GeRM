@@ -1,8 +1,8 @@
-# README Generator
+# GeRM
 
 ## 项目描述
 
-`readme-generator` 是一个利用大型语言模型（LLM）的工具，用于自动生成项目的README文档。它通过分析代码结构和内容，生成具有良好格式的文档，帮助开发者快速创建项目说明。
+`GeRM` 是一个利用大型语言模型（LLM）Agent的工具，用于自动生成项目的README文档。它通过分析代码结构和内容，生成具有良好格式的文档，帮助开发者快速创建项目说明。
 
 ## 主要特性
 
@@ -14,13 +14,13 @@
 
 ## 安装说明
 
-要安装`readme-generator`，请按照以下步骤操作：
+要安装`GeRM`，请按照以下步骤操作：
 
 1. 克隆该仓库：
 
    ```bash
-   git clone https://github.com/yourusername/readme-generator.git
-   cd readme-generator
+   git clone https://github.com/hcxxxxxx/GeRM.git
+   cd GeRM
    ```
 
 2. 安装依赖项：
@@ -40,17 +40,17 @@
 使用命令行工具生成README：
 
 ```bash
-readme-generator
+python -m src.main --repo_path /path/to/your/repository
 ```
 
-这将自动分析当前目录下的代码文件并生成README文档。
+这将自动分析指定目录下的代码文件并生成README文档。
 
 ## 项目架构
 
 该项目的目录结构如下：
 
 ```
-readme-generator/
+GeRM/
 ├── config/
 │   └── config.py            # 配置文件
 ├── examples/
