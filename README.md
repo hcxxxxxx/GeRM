@@ -1,4 +1,3 @@
-```markdown
 # README Generator
 
 ## 项目描述
