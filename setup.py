@@ -7,14 +7,14 @@ with open("requirements.txt", "r", encoding="utf-8") as f:
     requirements = f.read().splitlines()
 
 setup(
-    name="readme-generator",
+    name="GeRM",
     version="0.1.0",
     author="Your Name",
     author_email="your.email@example.com",
     description="LLM Agent for automatic README generation",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/readme-generator",
+    url="https://github.com/yourusername/GeRM",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -25,7 +25,7 @@ setup(
     install_requires=requirements,
     entry_points={
         "console_scripts": [
-            "readme-generator=src.main:main",
+            "GeRM=src.main:main",
         ],
     },
 )
