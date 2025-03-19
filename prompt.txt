@@ -1,4 +1,4 @@
-# LLM Agent README生成器项目构思
+# LLM Agent GeRM项目构思
 
 您的项目是一个利用大模型Agent来自动为代码仓库生成README.md文件的工具，集成OpenAI API。这是一个很有价值的项目，因为好的README文档对于开源项目至关重要，但开发者常常忽略或没有时间编写。
 
@@ -1141,7 +1141,7 @@ class ReadmeGenerator:
     """README生成服务类"""
     
     def __init__(self):
-        """初始化README生成器"""
+        """初始化GeRM"""
         self.agent = ReadmeAgent()
     
     def generate(self, repo_analysis: Dict[str, Any]) -> str:

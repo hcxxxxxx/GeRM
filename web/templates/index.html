@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+
+{% block title %}GeRM - 用AI自动创建专业README文档{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>用AI生成专业README文档</h1>
+        <p>只需上传您的代码仓库，我们的AI将分析项目结构和内容，自动创建高质量的README.md文件</p>
+    </div>
+    <div class="hero-image">
+        <div class="code-editor">
+            <div class="code-header">
+                <span class="file-name">README.md</span>
+                <div class="window-controls">
+                    <span class="control red"></span>
+                    <span class="control yellow"></span>
+                    <span class="control green"></span>
+                </div>
+            </div>
+            <div class="code-content">
+                <pre><code># 您的项目名称
+
+使用AI自动生成的专业README文档
+
+## 特性
+
+✅ 项目结构智能分析
+✅ 功能和API自动识别
+✅ 专业格式和样式
+✅ 安装和使用指南
+</code></pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="upload-section">
+    <div class="card">
+        <h2>上传您的代码仓库</h2>
+        <form method="POST" action="{{ url_for('generate') }}" enctype="multipart/form-data" class="upload-form">
+            {{ form.hidden_tag() }}
+            
+            <div class="form-group">
+                <div class="upload-container">
+                    <label for="{{ form.repo_upload.id }}" class="upload-label">
+                        <div class="upload-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                        </div>
+                        <div class="upload-text">
+                            <span class="upload-title">拖放ZIP文件或点击上传</span>
+                            <span class="upload-subtitle">最大文件大小: 50MB</span>
+                        </div>
+                    </label>
+                    {{ form.repo_upload(class="file-input") }}
+                    <div class="selected-file"></div>
+                </div>
+                {% if form.repo_upload.errors %}
+                <div class="form-errors">
+                    {% for error in form.repo_upload.errors %}
+                    <span class="error">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="divider">
+                <span>或</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.repo_url.id }}">Git仓库URL</label>
+                {{ form.repo_url(class="form-control", placeholder="https://github.com/username/repo.git") }}
+                {% if form.repo_url.errors %}
+                <div class="form-errors">
+                    {% for error in form.repo_url.errors %}
+                    <span class="error">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-action">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>
+</section>
+
+<section class="features">
+    <h2>为什么选择GeRM</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+            </div>
+            <h3>智能代码分析</h3>
+            <p>自动分析代码结构、识别语言和依赖，提取关键组件和功能。</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon>
+                    <line x1="3" y1="22" x2="21" y2="22"></line>
+                </svg>
+            </div>
+            <h3>专业文档格式</h3>
+            <p>生成结构清晰、格式专业的README文档，包含必要的章节和信息。</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <h3>用户友好</h3>
+            <p>简单直观的界面，只需几秒钟即可生成README，无需复杂配置。</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
+            </div>
+            <h3>多语言支持</h3>
+            <p>支持多种编程语言和项目类型，适应不同的开发场景。</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // 文件上传预览
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.querySelector('.file-input');
+        const selectedFile = document.querySelector('.selected-file');
+        
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                const fileName = this.files[0].name;
+                const fileSize = (this.files[0].size / (1024 * 1024)).toFixed(2);
+                selectedFile.innerHTML = `
+                    <div class="file-preview">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        <span class="file-name">${fileName}</span>
+                        <span class="file-size">${fileSize} MB</span>
+                        <button type="button" class="remove-file">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                
+                // 添加删除文件的事件监听
+                const removeBtn = selectedFile.querySelector('.remove-file');
+                removeBtn.addEventListener('click', function() {
+                    fileInput.value = '';
+                    selectedFile.innerHTML = '';
+                });
+            }
+        });
+        
+        // 拖放功能
+        const uploadLabel = document.querySelector('.upload-label');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadLabel.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadLabel.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadLabel.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            uploadLabel.classList.add('highlight');
+        }
+        
+        function unhighlight() {
+            uploadLabel.classList.remove('highlight');
+        }
+        
+        uploadLabel.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            fileInput.files = files;
+            
+            // 触发change事件
+            const event = new Event('change');
+            fileInput.dispatchEvent(event);
+        }
+    });
+</script>
+{% endblock %}

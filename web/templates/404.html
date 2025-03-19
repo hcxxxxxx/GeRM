@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}页面未找到 - GeRM{% endblock %}
+
+{% block content %}
+<section class="error-section">
+    <div class="error-container">
+        <h1>404</h1>
+        <h2>页面未找到</h2>
+        <p>很抱歉，您要查找的页面不存在或已被移除。</p>
+        <a href="{{ url_for('index') }}" class="btn btn-primary">返回首页</a>
+    </div>
+</section>
+{% endblock %}

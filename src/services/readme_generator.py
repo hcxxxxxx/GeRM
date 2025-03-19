@@ -10,7 +10,7 @@ class ReadmeGenerator:
     """README生成服务类"""
     
     def __init__(self):
-        """初始化README生成器"""
+        """初始化GeRM"""
         self.agent = ReadmeAgent()
     
     def generate(self, repo_analysis: Dict[str, Any]) -> str:

@@ -27,6 +27,7 @@
 
    ```bash
    pip install -r requirements.txt
+   pip install -r requirements-web.txt
    ```
 
 3. 运行安装程序：
@@ -44,6 +45,11 @@ python -m src.main --repo_path /path/to/your/repository
 ```
 
 这将自动分析指定目录下的代码文件并生成README文档。
+
+GeRM也提供了一个简洁美观的Web界面，可以通过以下方式启动：
+
+```bash
+python -m web.app
 
 ## 项目架构
 

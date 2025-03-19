@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}服务器错误 - GeRM{% endblock %}
+
+{% block content %}
+<section class="error-section">
+    <div class="error-container">
+        <h1>500</h1>
+        <h2>服务器错误</h2>
+        <p>抱歉，服务器发生了错误。请稍后再试或联系管理员。</p>
+        <a href="{{ url_for('index') }}" class="btn btn-primary">返回首页</a>
+    </div>
+</section>
+{% endblock %}

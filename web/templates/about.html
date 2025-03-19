@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}关于GeRM{% endblock %}
+
+{% block content %}
+<section class="about-section">
+    <h1>关于GeRM</h1>
+    
+    <div class="about-content">
+        <div class="about-description">
+            <h2>什么是GeRM？</h2>
+            <p>GeRM是一个基于人工智能的工具，它能够自动分析您的代码仓库并生成专业的README.md文档。无论您是开源项目的维护者，还是企业内部项目的开发者，一个好的README文档对于项目的可访问性和可用性至关重要，但编写这样的文档常常是一项耗时的任务。</p>
+            
+            <p>我们的工具利用先进的大语言模型(LLM)技术，能够理解代码结构、识别关键组件和功能，并生成一个结构清晰、内容全面的README文档，帮助您节省时间，同时提升项目文档的质量。</p>
+            
+            <h2>主要特性</h2>
+            <ul>
+                <li><strong>智能代码分析</strong> - 自动识别项目结构、语言和依赖</li>
+                <li><strong>内容智能生成</strong> - 生成项目描述、特性列表、安装和使用指南</li>
+                <li><strong>多语言支持</strong> - 支持多种编程语言和项目类型</li>
+                <li><strong>易于使用</strong> - 简单的上传界面，几秒钟内生成结果</li>
+                <li><strong>专业格式</strong> - 生成遵循最佳实践的Markdown格式文档</li>
+            </ul>
+            
+            <h2>技术实现</h2>
+            <p>GeRM背后的技术包括：</p>
+            <ul>
+                <li>先进的大语言模型(LLM)，用于代码理解和内容生成</li>
+                <li>代码解析工具，用于提取项目结构和依赖信息</li>
+                <li>现代Web技术栈，提供流畅的用户体验</li>
+            </ul>
+            
+            <h2>隐私和安全</h2>
+            <p>我们非常重视您的隐私和数据安全。上传的代码仓库仅用于分析和生成README，不会永久存储或用于其他目的。所有临时文件会在生成完成后自动删除。</p>
+        </div>
+        
+        <div class="about-sidebar">
+            <div class="card">
+                <h3>开始使用</h3>
+                <p>只需点击下面的按钮，上传您的代码仓库或提供Git URL，即可获得专业的README文档。</p>
+                <a href="{{ url_for('index') }}" class="btn btn-primary">生成README</a>
+            </div>
+            
+            <div class="card">
+                <h3>开源项目</h3>
+                <p>GeRM是一个开源项目，欢迎贡献和提出建议。</p>
+                <a href="https://github.com/hcxxxxxx/GeRM" target="_blank" class="btn btn-outline">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                    GitHub仓库
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

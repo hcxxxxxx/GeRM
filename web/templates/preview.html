@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}README预览 - {{ repo_name }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/markdown.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="preview-section">
+    <div class="preview-header">
+        <h1>README预览: {{ repo_name }}</h1>
+        <div class="preview-actions">
+            <a href="{{ url_for('download', generation_id=generation_id) }}" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                下载README.md
+            </a>
+            <button id="copyBtn" class="btn btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                复制Markdown
+            </button>
+            <a href="{{ url_for('index') }}" class="btn btn-outline">生成新README</a>
+        </div>
+    </div>
+    
+    <div class="preview-container">
+        <div class="preview-tabs">
+            <button class="tab-btn active" data-tab="preview">预览</button>
+            <button class="tab-btn" data-tab="markdown">Markdown</button>
+        </div>
+        
+        <div class="tab-content">
+            <div id="preview" class="tab-pane active">
+                <div class="markdown-body">
+                    {{ readme_html|safe }}
+                </div>
+            </div>
+            <div id="markdown" class="tab-pane">
+                <pre><code class="markdown">{{ readme_md }}</code></pre>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/preview.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 标签切换功能
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 移除所有活动标签
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabPanes.forEach(p => p.classList.remove('active'));
+                
+                // 设置当前活动标签
+                this.classList.add('active');
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // 复制Markdown功能
+        const copyBtn = document.getElementById('copyBtn');
+        const markdownText = `{{ readme_md|replace("\n", "\\n")|replace("'", "\\'")|replace('"', '\\"')|safe }}`;
+        
+        copyBtn.addEventListener('click', function() {
+            navigator.clipboard.writeText(markdownText).then(function() {
+                // 更改按钮状态表示复制成功
+                copyBtn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    已复制
+                `;
+                copyBtn.classList.add('copied');
+                
+                // 3秒后恢复按钮状态
+                setTimeout(() => {
+                    copyBtn.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        复制Markdown
+                    `;
+                    copyBtn.classList.remove('copied');
+                }, 3000);
+            }).catch(function(err) {
+                console.error('无法复制文本: ', err);
+                copyBtn.textContent = '复制失败';
+            });
+        });
+    });
+</script>
+{% endblock %}
