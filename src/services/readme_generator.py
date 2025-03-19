@@ -32,6 +32,12 @@ class ReadmeGenerator:
             # 使用Agent生成README
             readme_content = self.agent.generate_readme(processed_analysis)
             
+            # 去掉开头的```markdown标识头
+            if readme_content.startswith("```markdown"):
+                readme_content = readme_content.replace("```markdown", "", 1).strip()
+            if readme_content.endswith("```"):
+                readme_content = readme_content[:-3].strip()
+            
             logger.info("README生成成功")
             return readme_content
             
